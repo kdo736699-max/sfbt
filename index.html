@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>谁是专家 · 高级社会工作实务 学期回顾</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0b0b0e; --black-2:#15151c; --ink:#16161e;
+  --paper:#f3f0e9; --paper-2:#e6e1d6;
+  --red:#d9202c; --red-deep:#9a0f18; --red-glow:rgba(217,32,44,.16);
+  --blue:#3f78b6; --blue-deep:#234e84; --blue-glow:rgba(63,120,182,.16);
+  --grey:#9a9aa6;
+  --line-d:rgba(243,240,233,.17); --line-l:rgba(20,20,30,.13);
+  --serif:"Noto Serif SC","Songti SC","SimSun",serif;
+  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --mono:"Space Mono","Noto Sans SC",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:var(--sans);background:var(--black);color:var(--paper);-webkit-font-smoothing:antialiased;overflow:hidden}
+#deck{height:100vh;height:100dvh;overflow-y:scroll;scroll-snap-type:y mandatory;scroll-behavior:smooth;scrollbar-width:none}
+#deck::-webkit-scrollbar{display:none}
+.scene{position:relative;min-height:100vh;min-height:100dvh;scroll-snap-align:start;scroll-snap-stop:always;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:clamp(34px,5.5vw,96px);padding-left:clamp(62px,8.5vw,140px);overflow:hidden}
+.dark{background:var(--black);color:var(--paper)}
+.light{background:var(--paper);color:var(--ink)}
+#s2{background:linear-gradient(150deg,#f5f2eb,#e9e4d9)}
+#s6{background:linear-gradient(150deg,#101622,var(--black))}
+#s7{background:linear-gradient(150deg,#0f1622,var(--black))}
+#s8{background:radial-gradient(130% 110% at 78% 16%,#0f1825 0%,var(--black) 62%)}
+#s9{background:radial-gradient(130% 120% at 50% 0%,#220e12 0%,#0a0a0d 66%)}
+#s10{background:#07070a}
+#s11{background:linear-gradient(150deg,#f5f2eb,#e9e2d4)}
+
+.idx{position:absolute;top:clamp(8px,3vh,40px);right:clamp(16px,4vw,70px);font-family:var(--mono);font-weight:700;
+  font-size:clamp(80px,17vw,230px);line-height:1;color:currentColor;opacity:.05;pointer-events:none;z-index:0;user-select:none}
+.scene>*{position:relative;z-index:1}
+
+.eyebrow{font-family:var(--mono);font-size:clamp(13px,1.2vw,15px);letter-spacing:.22em;text-transform:uppercase;
+  margin-bottom:clamp(18px,2.2vw,30px);display:flex;align-items:center;gap:13px;color:var(--red)}
+.eyebrow::before{content:"";width:clamp(24px,3vw,46px);height:2px;background:var(--red)}
+.light .eyebrow{color:var(--red-deep)}.light .eyebrow::before{background:var(--red-deep)}
+#s8 .eyebrow{color:var(--blue)}#s8 .eyebrow::before{background:var(--blue)}
+h1,h2{font-family:var(--serif);font-weight:900;line-height:1.1;letter-spacing:.005em}
+.huge{font-size:clamp(46px,7.4vw,108px)}
+.big{font-size:clamp(36px,5.4vw,80px)}
+.mid{font-size:clamp(29px,3.9vw,54px);font-weight:700;font-family:var(--serif);line-height:1.18}
+.red{color:var(--red)}.blue{color:var(--blue)}
+.lede{font-weight:300;font-size:clamp(19px,2vw,27px);line-height:1.6;max-width:38ch;margin-top:clamp(20px,2.4vw,32px);opacity:.88}
+.note{font-size:clamp(16px,1.6vw,20px);line-height:1.68;max-width:48ch;margin-top:clamp(18px,2.2vw,28px);font-weight:300;opacity:.7}
+.refl{margin-top:clamp(22px,2.6vw,34px);font-weight:300;font-size:clamp(17px,1.8vw,22px);line-height:1.58;
+  max-width:44ch;border-left:3px solid var(--red);padding-left:22px;opacity:.95}
+.refl b{font-weight:600}
+#s8 .refl{border-color:var(--blue)}
+
+.r{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.scene.in .r{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.24s}.d3{transition-delay:.38s}.d4{transition-delay:.52s}
+.d5{transition-delay:.66s}.d6{transition-delay:.8s}.d7{transition-delay:.94s}
+
+/* dial */
+.dial{display:inline-flex;align-items:center;gap:13px;margin-top:clamp(16px,2vw,26px);font-family:var(--mono);font-size:clamp(13px,1.05vw,15px);letter-spacing:.04em}
+.dial .end{opacity:.5;white-space:nowrap}
+.dial .end.hot{opacity:1;color:var(--red);font-weight:700}
+.dial .end.hotb{opacity:1;color:var(--blue);font-weight:700}
+.dial-track{position:relative;width:clamp(140px,18vw,250px);height:3px;background:var(--line-d);border-radius:9px}
+.light .dial-track{background:var(--line-l)}
+.dial-dot{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--red);transform:translate(-50%,-50%);
+  box-shadow:0 0 0 5px var(--red-glow);transition:left .9s cubic-bezier(.6,0,.2,1)}
+.dial-dot.b{background:var(--blue);box-shadow:0 0 0 5px var(--blue-glow)}
+.scene .dial-dot{left:50%!important}
+.scene.in .dial-dot{left:var(--pos)!important}
+.dial-tag{font-family:var(--serif);font-weight:700;font-size:clamp(19px,2.1vw,30px);margin-top:16px}
+
+/* thesis blocks */
+.blocks{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.4vw,34px);margin-top:clamp(22px,2.6vw,36px);max-width:980px}
+.block{border-left:5px solid var(--red);padding:6px 0 6px 22px}
+.block .bk-tag{font-family:var(--mono);font-size:14px;letter-spacing:.16em;color:var(--red);text-transform:uppercase}
+.block h3{font-family:var(--serif);font-weight:900;font-size:clamp(24px,2.9vw,40px);margin:8px 0 12px;line-height:1.16}
+.block p{font-weight:300;font-size:clamp(16px,1.6vw,20px);line-height:1.55;opacity:.82}
+.draw line{stroke-dasharray:300;stroke-dashoffset:300}
+.scene.in .draw line{animation:drawIn 1.5s cubic-bezier(.5,0,.2,1) forwards}
+@keyframes drawIn{to{stroke-dashoffset:0}}
+
+/* role chips */
+.roles{display:flex;flex-wrap:wrap;gap:11px;margin-top:clamp(18px,2.2vw,28px)}
+.role{font-family:var(--sans);font-weight:500;font-size:clamp(15px,1.5vw,18px);padding:12px 22px;border-radius:6px;
+  border:1.5px solid var(--line-d);background:transparent;color:var(--paper);cursor:pointer;transition:all .3s}
+.role:hover{border-color:var(--red)}
+.role.on{background:var(--red);border-color:var(--red);color:#fff}
+.role-say{margin-top:18px;font-family:var(--serif);font-weight:500;font-size:clamp(18px,2vw,25px);line-height:1.45;max-width:34ch;min-height:1.5em;color:#f3f0e9;opacity:.94}
+
+/* gaze */
+.gaze-wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,28px);margin-top:clamp(26px,3vw,40px);max-width:980px}
+.gaze{padding:clamp(22px,2.5vw,34px);border-radius:6px;border:1px solid var(--line-l);background:#fff}
+.gaze.cold{border-left:6px solid var(--blue)}
+.gaze.warm{border-left:6px solid var(--red)}
+.gaze .who{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px;opacity:.62}
+.gaze .q{font-family:var(--serif);font-weight:700;font-size:clamp(23px,2.6vw,34px);line-height:1.26}
+.gaze .sub{margin-top:15px;font-weight:300;font-size:clamp(15px,1.45vw,18px);opacity:.7;line-height:1.55}
+.pull{font-family:var(--serif);font-weight:700;font-size:clamp(22px,2.5vw,35px);margin-top:clamp(24px,2.8vw,40px);line-height:1.38;max-width:25ch}
+.pull em{font-style:normal;color:var(--red)}
+
+/* === technique orbit === */
+.orbit-wrap{display:flex;justify-content:center;margin-top:clamp(8px,1.5vw,20px)}
+.orbit{position:relative;width:min(74vw,62vh,560px);height:min(74vw,62vh,560px)}
+.hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:3;
+  width:clamp(120px,22%,170px);height:clamp(120px,22%,170px);border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border:1.5px solid var(--red);background:radial-gradient(circle,rgba(217,32,44,.14),transparent 70%)}
+.hub .hub-s{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--red)}
+.hub .hub-t{font-family:var(--serif);font-weight:900;font-size:clamp(16px,2vw,22px);line-height:1.2;margin-top:4px}
+.ring{position:absolute;inset:0;will-change:transform;animation:spin var(--dur,100s) linear infinite}
+.ring.rev{animation-direction:reverse}
+.orbit:hover .ring{animation-play-state:paused}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ritem{position:absolute;top:50%;left:50%;width:0;height:0;transform:rotate(var(--a)) translateY(calc(-1*var(--R)))}
+.rkeep{position:absolute;top:0;left:0;width:0;height:0;will-change:transform;animation:spin var(--dur,100s) linear infinite reverse}
+.ring.rev .rkeep{animation-direction:normal}
+.orbit:hover .rkeep{animation-play-state:paused}
+.rlbl{position:absolute;transform:translate(-50%,-50%) rotate(var(--na));white-space:nowrap;
+  font-family:var(--sans);font-weight:400;font-size:clamp(12.5px,1.35vw,15.5px);color:rgba(243,240,233,.6);
+  padding:5px 10px;border:1px solid var(--line-d);border-radius:4px;background:var(--black)}
+.rlbl.core{font-family:var(--serif);font-weight:700;font-size:clamp(14px,1.7vw,19px);color:#fff;
+  border-color:var(--red);background:var(--red-glow);box-shadow:0 0 18px rgba(217,32,44,.25)}
+.orbit-cap{text-align:center;font-family:var(--serif);font-weight:700;font-size:clamp(18px,2vw,26px);margin-top:clamp(14px,2vw,26px)}
+.orbit-cap .red{color:var(--red)}
+
+/* three core */
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.8vw,24px);margin-top:clamp(24px,2.8vw,38px);max-width:1040px}
+.tcard{border:1px solid var(--line-d);border-radius:7px;padding:clamp(20px,2.2vw,28px);background:rgba(243,240,233,.03)}
+.tcard .tn{font-family:var(--mono);font-size:13px;letter-spacing:.12em;color:var(--red);margin-bottom:12px}
+.tcard h3{font-family:var(--serif);font-weight:700;font-size:clamp(22px,2.3vw,30px);margin-bottom:14px}
+.tcard p{font-weight:300;font-size:clamp(15px,1.45vw,17.5px);line-height:1.6;opacity:.84}
+.tcard .ex{margin-top:14px;font-family:var(--serif);color:#ffd9b0;font-size:clamp(15px,1.5vw,18px);line-height:1.5}
+.morning{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+.mchip{font-family:var(--serif);font-weight:500;font-size:clamp(13.5px,1.4vw,16px);background:var(--red-glow);border:1px solid rgba(217,32,44,.4);color:#ffcdb0;padding:7px 14px;border-radius:999px}
+.cmp-toggle{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.cmpb{font-family:var(--mono);font-size:12px;letter-spacing:.05em;padding:7px 13px;border-radius:4px;border:1px solid var(--line-d);background:transparent;color:rgba(243,240,233,.6);cursor:pointer;transition:all .25s}
+.cmpb.on{background:var(--red);border-color:var(--red);color:#fff}
+.cmp-out{margin-top:12px;font-family:var(--serif);font-size:clamp(15px,1.5vw,18px);line-height:1.5;color:#ffd9b0;min-height:3.4em}
+.refl.warm-key{border-color:var(--red);max-width:50ch}
+
+/* scaling */
+.scale-prompt{font-family:var(--serif);font-weight:500;font-size:clamp(22px,2.4vw,36px);line-height:1.34;max-width:25ch;margin-top:6px}
+.scale-box{margin-top:clamp(32px,4vw,54px);max-width:800px;width:100%}
+.scale-track{position:relative;height:6px;background:var(--line-d);border-radius:99px}
+.scale-fill{position:absolute;left:0;top:0;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--blue),var(--red));width:20%}
+.scale-ticks{display:flex;justify-content:space-between;margin-top:14px;font-family:var(--mono);font-size:14px;opacity:.44}
+.scale-marker{position:absolute;top:50%;left:20%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;
+  background:var(--red);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:700;font-size:20px;color:#fff;
+  box-shadow:0 0 0 8px var(--red-glow),0 8px 24px rgba(0,0,0,.45);pointer-events:none;transition:left .14s ease,background .14s}
+.scale-name{position:absolute;top:-32px;left:50%;transform:translateX(-50%);font-family:var(--serif);font-size:15px;color:var(--red);white-space:nowrap}
+input[type=range].scaler{position:absolute;top:50%;left:0;transform:translateY(-50%);width:100%;height:52px;margin:0;background:transparent;-webkit-appearance:none;appearance:none;cursor:grab}
+input[type=range].scaler:active{cursor:grabbing}
+input[type=range].scaler::-webkit-slider-thumb{-webkit-appearance:none;width:52px;height:52px;border-radius:50%;background:transparent}
+input[type=range].scaler::-moz-range-thumb{width:52px;height:52px;border:0;border-radius:50%;background:transparent}
+input[type=range].scaler:focus-visible{outline:none}
+input[type=range].scaler:focus-visible+.scale-marker{box-shadow:0 0 0 4px var(--paper),0 0 0 12px var(--red-glow)}
+.scale-cap{margin-top:clamp(28px,3.2vw,42px);min-height:84px;max-width:48ch}
+.scale-cap .who{font-family:var(--mono);font-size:14px;letter-spacing:.12em;color:var(--red);text-transform:uppercase}
+.scale-cap .txt{font-family:var(--serif);font-weight:500;font-size:clamp(18px,2vw,26px);line-height:1.4;margin-top:8px}
+.scale-principle{margin-top:clamp(22px,2.4vw,30px);font-weight:300;font-size:clamp(16px,1.5vw,19px);opacity:.74;max-width:46ch;line-height:1.58;border-left:3px solid var(--red);padding-left:20px}
+
+/* assessment map */
+.amap{display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(22px,3.5vw,56px);margin-top:clamp(24px,2.8vw,38px);max-width:1140px;align-items:start}
+.acats{display:flex;flex-direction:column;gap:10px}
+.acat{font-family:var(--serif);font-weight:700;font-size:clamp(19px,2vw,26px);text-align:left;padding:15px 22px;border-radius:7px;
+  border:1px solid var(--line-d);background:transparent;color:rgba(243,240,233,.72);cursor:pointer;transition:all .3s;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.acat:hover{border-color:var(--red);color:#fff}
+.acat.on{background:var(--red);border-color:var(--red);color:#fff}
+.acat .ac-n{font-family:var(--mono);font-size:13px;opacity:.6}
+.adetail{border-left:2px solid var(--red);padding-left:clamp(18px,2.2vw,32px);min-height:250px}
+.adetail h3{font-family:var(--serif);font-weight:900;font-size:clamp(26px,2.9vw,40px);margin-bottom:8px}
+.adetail .anote{font-weight:300;font-size:clamp(16px,1.6vw,20px);line-height:1.58;opacity:.8;margin-bottom:22px;max-width:40ch}
+.aitems{display:flex;flex-direction:column;gap:12px}
+.aitem{font-family:var(--serif);font-weight:500;font-size:clamp(17px,1.8vw,23px);padding-left:28px;position:relative;opacity:0;transform:translateX(-12px);transition:all .5s ease}
+.aitem.show{opacity:1;transform:none}
+.aitem::before{content:"";position:absolute;left:0;top:.6em;width:10px;height:10px;background:var(--red);border-radius:50%}
+.atag{margin-top:24px;font-family:var(--mono);font-size:clamp(13px,1.2vw,15px);letter-spacing:.05em;color:var(--blue);padding:9px 15px;border:1px solid var(--blue-glow);border-radius:5px;display:inline-block}
+
+/* MSE 7 dims interactive */
+.dims{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(22px,2.6vw,34px);max-width:1000px}
+.dimb{font-family:var(--serif);font-weight:600;font-size:clamp(15px,1.6vw,20px);padding:11px 18px;border-radius:6px;
+  border:1px solid rgba(63,120,182,.4);background:rgba(63,120,182,.07);color:#a8c8ec;cursor:pointer;transition:all .3s;display:flex;align-items:center;gap:9px}
+.dimb .dnum{font-family:var(--mono);font-size:12px;opacity:.7}
+.dimb:hover{border-color:var(--blue)}
+.dimb.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.dim-out{margin-top:clamp(24px,2.8vw,38px);max-width:50ch;border-left:3px solid var(--blue);padding-left:22px}
+.dim-out .do-h{font-family:var(--mono);font-size:14px;letter-spacing:.1em;color:var(--blue);text-transform:uppercase}
+.dim-out .do-t{font-family:var(--serif);font-weight:500;font-size:clamp(19px,2.1vw,27px);line-height:1.45;margin-top:10px;color:#eaf1f8}
+
+/* flip cards */
+.flip-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:clamp(22px,2.6vw,34px);max-width:1080px}
+.flip{height:168px;perspective:1200px;cursor:pointer}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .7s cubic-bezier(.4,.1,.2,1);transform-style:preserve-3d}
+.flip.on .flip-in{transform:rotateY(180deg)}
+.flip-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:7px;padding:18px;display:flex;flex-direction:column;justify-content:space-between}
+.flip-front{background:rgba(63,120,182,.1);border:1px solid rgba(63,120,182,.42)}
+.flip-back{background:var(--red-glow);border:1px solid rgba(217,32,44,.5);transform:rotateY(180deg)}
+.flip-lbl{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.flip-front .flip-lbl{color:var(--blue)}.flip-back .flip-lbl{color:var(--red)}
+.flip-txt{font-family:var(--serif);font-weight:500;font-size:clamp(16px,1.65vw,20px);line-height:1.36}
+.flip-hint{font-family:var(--mono);font-size:10px;opacity:.45;margin-top:6px}
+.concepts{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(20px,2.4vw,30px)}
+.concept{font-family:var(--mono);font-size:clamp(13px,1.2vw,15px);padding:9px 15px;border-radius:5px;border:1px solid rgba(63,120,182,.45);color:#a8c8ec;letter-spacing:.03em}
+
+/* case39 */
+.dilemma{font-family:var(--serif);font-weight:500;font-size:clamp(21px,2.3vw,33px);line-height:1.4;max-width:28ch;margin-top:8px}
+.choices{display:flex;gap:14px;margin-top:clamp(22px,2.6vw,36px);flex-wrap:wrap}
+.choice{font-family:var(--sans);font-weight:500;font-size:clamp(16px,1.5vw,20px);padding:16px 30px;border-radius:7px;background:transparent;border:1.5px solid var(--paper);color:var(--paper);cursor:pointer;transition:all .3s}
+.choice:hover{background:var(--red);border-color:var(--red);color:#fff}
+.choice.picked{background:var(--red);border-color:var(--red);color:#fff}
+.reveal39{margin-top:clamp(22px,2.8vw,36px);max-width:54ch;opacity:0;max-height:0;overflow:hidden;transition:opacity .6s ease,max-height .7s ease}
+.reveal39.show{opacity:1;max-height:520px}
+.reveal39 .twist{font-family:var(--serif);font-weight:700;font-size:clamp(20px,2.1vw,29px);line-height:1.4;color:var(--red)}
+.reveal39 .eth{margin-top:18px;font-weight:300;font-size:clamp(16px,1.55vw,20px);line-height:1.64;opacity:.9}
+.reveal39 .eth b{font-weight:600;color:#fff}
+
+/* danger toggle */
+.toggle-row{display:inline-flex;border:1.5px solid var(--line-d);border-radius:8px;overflow:hidden;margin-top:clamp(20px,2.4vw,32px)}
+.tgl{font-family:var(--sans);font-weight:500;font-size:clamp(15px,1.45vw,18px);padding:14px 26px;background:transparent;border:0;color:rgba(243,240,233,.6);cursor:pointer;transition:all .3s}
+.tgl.on{background:var(--red);color:#fff}
+.panel-sui{margin-top:clamp(24px,3vw,38px);max-width:58ch}
+.grave{list-style:none}
+.grave li{font-weight:300;font-size:clamp(16px,1.6vw,20px);line-height:1.64;margin-bottom:clamp(16px,1.9vw,24px);padding-left:46px;position:relative;color:rgba(243,240,233,.88)}
+.grave li .gn{position:absolute;left:0;top:1px;font-family:var(--mono);font-size:14px;color:var(--red);border:1px solid rgba(217,32,44,.5);width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.grave li b{color:#fff;font-weight:600;font-family:var(--serif)}
+.sui-close{font-family:var(--serif);font-weight:500;font-size:clamp(18px,2vw,27px);line-height:1.46;margin-top:clamp(22px,2.8vw,36px);max-width:30ch;color:#ece9e1}
+.hide{display:none}
+
+/* synthesis */
+.syn-buttons{display:flex;flex-wrap:wrap;gap:11px;margin-top:clamp(22px,2.6vw,34px)}
+.synb{font-family:var(--sans);font-weight:500;font-size:clamp(15px,1.5vw,19px);padding:13px 24px;border-radius:6px;background:transparent;border:1.5px solid var(--line-l);color:var(--ink);cursor:pointer;transition:all .3s}
+.synb:hover{border-color:var(--red-deep)}
+.synb.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.syn-dial{margin-top:clamp(24px,3vw,40px);max-width:680px}
+.syn-track{position:relative;height:4px;background:var(--line-l);border-radius:9px}
+.syn-dot{position:absolute;top:50%;width:24px;height:24px;border-radius:50%;background:var(--red-deep);transform:translate(-50%,-50%);box-shadow:0 0 0 6px rgba(154,15,24,.14);transition:left .8s cubic-bezier(.6,0,.2,1)}
+.syn-ends{display:flex;justify-content:space-between;margin-top:15px;font-family:var(--mono);font-size:14px;opacity:.55}
+.syn-verdict{font-family:var(--serif);font-weight:700;font-size:clamp(20px,2.1vw,29px);margin-top:20px;min-height:1.5em;color:var(--red-deep)}
+.close-ans{font-family:var(--serif);font-weight:500;font-size:clamp(20px,2.2vw,32px);line-height:1.48;max-width:30ch;margin-top:clamp(24px,2.8vw,38px)}
+.close-ans b{font-weight:900;color:var(--red)}
+.close-final{margin-top:clamp(20px,2.4vw,32px);font-weight:300;font-size:clamp(17px,1.7vw,22px);line-height:1.62;max-width:40ch;opacity:.9}
+.close-final b{font-weight:700;color:var(--ink)}
+.sign{margin-top:clamp(24px,3vw,42px);font-family:var(--mono)}
+.sign .s-thx{font-family:var(--serif);font-weight:900;font-size:clamp(22px,2.4vw,32px);color:var(--ink);letter-spacing:.3em}
+.sign .s-name{margin-top:12px;font-size:clamp(14px,1.4vw,17px);letter-spacing:.1em;color:#5a554c}
+.sign .s-name b{color:var(--red-deep);letter-spacing:.05em}
+
+/* chrome */
+.rail{position:fixed;left:clamp(16px,2.2vw,38px);top:0;bottom:0;z-index:40;pointer-events:none}
+.rail-line{position:absolute;top:14vh;bottom:14vh;left:0;width:2px;background:rgba(150,150,160,.22)}
+.rail-fill{position:absolute;top:14vh;left:0;width:2px;background:linear-gradient(180deg,var(--red),var(--blue));height:0;transition:height .45s ease}
+.counter{position:fixed;right:clamp(18px,2.4vw,38px);top:clamp(20px,3vh,38px);z-index:40;font-family:var(--mono);font-size:14px;letter-spacing:.1em;color:var(--grey)}
+.counter b{color:var(--red)}.light .counter{color:#7a756c}
+.dotnav{position:fixed;right:clamp(18px,2.4vw,38px);top:50%;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:11px}
+.dotnav button{width:9px;height:9px;border-radius:50%;border:1px solid var(--grey);background:transparent;padding:0;cursor:pointer;transition:all .3s}
+.dotnav button:hover{border-color:var(--red)}
+.dotnav button.on{background:var(--red);border-color:var(--red);transform:scale(1.3)}
+.hint{position:absolute;bottom:clamp(22px,4vh,44px);left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:13px;letter-spacing:.14em;opacity:.45;display:flex;flex-direction:column;align-items:center;gap:7px}
+.hint .arr{width:1px;height:22px;background:linear-gradient(currentColor,transparent);animation:drop 1.9s infinite}
+@keyframes drop{0%{transform:translateY(-7px);opacity:0}40%{opacity:1}100%{transform:translateY(7px);opacity:0}}
+
+@media (max-width:820px){
+  .scene{padding:66px 22px 80px;padding-left:46px}
+  .blocks,.gaze-wrap,.flip-row,.tri,.amap{grid-template-columns:1fr}
+  .amap{gap:24px}.adetail{min-height:0}
+  .flip-row{grid-template-columns:1fr 1fr;gap:11px}.flip{height:150px}
+  .dotnav{right:12px;gap:8px}.counter{right:12px}.rail{left:10px}
+  .idx{font-size:clamp(64px,22vw,120px)}
+  .orbit{width:min(86vw,86vw,420px);height:min(86vw,86vw,420px)}
+}
+@media (prefers-reduced-motion:reduce){
+  #deck{scroll-behavior:auto}
+  .r,.aitem{transition:none!important;opacity:1!important;transform:none!important}
+  .hint .arr{animation:none}.dial-dot{transition:none}
+  .ring,.rkeep{animation:none!important}
+  .draw line{stroke-dashoffset:0!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="rail" aria-hidden="true"><div class="rail-line"></div><div class="rail-fill" id="railFill"></div></div>
+<div class="counter"><b id="cNow">01</b> / 11</div>
+<nav class="dotnav" id="dots" aria-label="幻灯片导航"></nav>
+
+<main id="deck">
+
+  <!-- 1 thesis: two blocks -->
+  <section class="scene dark in" id="s1">
+    <div class="idx">01</div>
+    <div class="eyebrow r">高级社会工作实务 · 期末</div>
+    <h1 class="huge r d1">这学期，<br>就两大块。</h1>
+    <div class="blocks">
+      <div class="block r d2">
+        <span class="bk-tag">理论</span>
+        <h3>焦点解决<br>短期治疗</h3>
+        <p>怎么和一个人「说话」，陪他建构属于自己的解决之道。</p>
+      </div>
+      <div class="block r d3">
+        <span class="bk-tag">评估</span>
+        <h3>对个体与<br>状态的确认</h3>
+        <p>怎么把一个人「看清」——个体、家庭、问题，与不同的会谈对象。</p>
+      </div>
+    </div>
+    <p class="mid red r d4" style="margin-top:clamp(20px,2.6vw,34px)">而两块背后，是同一个问题：<br>你，以什么角色走进这段关系？</p>
+    <div class="roles r d5">
+      <button class="role on" data-k="expert">无所不知的专家</button>
+      <button class="role" data-k="detective">查案的侦探</button>
+      <button class="role" data-k="company">沉默的陪伴者</button>
+      <button class="role" data-k="mirror">一面镜子</button>
+    </div>
+    <p class="role-say" id="roleSay">——这学期之前，我以为助人就是「我懂，我来告诉你怎么办」。</p>
+    <div class="hint" aria-hidden="true"><span>下滑 / 方向键</span><span class="arr"></span></div>
+  </section>
+
+  <!-- 2 SFBT paradigm -->
+  <section class="scene light" id="s2">
+    <div class="idx">02</div>
+    <div class="eyebrow r">理论 · 焦点解决短期治疗 SFBT</div>
+    <div class="dial r d1" style="--pos:90%">
+      <span class="end">助人者</span><div class="dial-track"><div class="dial-dot"></div></div><span class="end hot">案主</span>
+    </div>
+    <h2 class="big r d1" style="margin-top:10px">它做的第一件事，<br>是把椅子让出去。</h2>
+    <div class="gaze-wrap">
+      <div class="gaze cold r d2">
+        <div class="who">本科四年 · 问题导向</div>
+        <div class="q">「你为什么<br>现在这么糟？」</div>
+        <div class="sub">往回找原因，往里揭伤口。越谈越沉。</div>
+      </div>
+      <div class="gaze warm r d3">
+        <div class="who">这学期 · 建构解决之道</div>
+        <div class="q">「你是怎么<br>撑到现在的？」</div>
+        <div class="sub">往前找资源、找例外、找希望。从一小步开始。</div>
+      </div>
+    </div>
+    <p class="pull r d5">「你没把自己弄得更糟，<em>已经很了不起了。</em>」<br>——接纳此刻，是 SFBT 的起手式。</p>
+  </section>
+
+  <!-- 3 technique orbit -->
+  <section class="scene dark" id="s3">
+    <div class="idx">03</div>
+    <div class="eyebrow r">SFBT · 一整套手艺</div>
+    <div class="orbit-wrap r d1">
+      <div class="orbit">
+        <div class="ring rev" id="ringIn" style="--dur:64s"></div>
+        <div class="ring" id="ringOut" style="--dur:104s"></div>
+        <div class="hub"><span class="hub-s">SFBT</span><span class="hub-t">建构<br>解决之道</span></div>
+      </div>
+    </div>
+    <p class="orbit-cap r d2">这本书给了我 <span class="red">二十多件</span> 工具。亮红的，是我最想讲的——<span class="red">三大技术</span> + 例外 + 评量。</p>
+  </section>
+
+  <!-- 4 three core + exception -->
+  <section class="scene dark" id="s4">
+    <div class="idx">04</div>
+    <div class="eyebrow r">SFBT 三大技术 · 加上「例外」</div>
+    <div class="tri">
+      <div class="tcard r d1">
+        <div class="tn">技术一</div><h3>奇迹式问句</h3>
+        <p>「假如今晚睡着后奇迹发生、问题都解决了——明早醒来，你会从哪个细节发现：不一样了？」把模糊的痛苦，变成一个能看见的早晨。</p>
+        <div class="morning"><span class="mchip">比孩子早起</span><span class="mchip">做早餐</span><span class="mchip">一起吃</span><span class="mchip">少争吵</span></div>
+      </div>
+      <div class="tcard r d2">
+        <div class="tn">技术二</div><h3>关系问句</h3>
+        <p>借案主身边的重要他人，唤起改变的动机，也偷偷植入赞美——</p>
+        <p class="ex">「如果你孩子也在这儿，我问他们：妈妈做了什么、让你觉得她是个好妈妈？你猜，他们会怎么说？」</p>
+      </div>
+      <div class="tcard r d3">
+        <div class="tn">技术三</div><h3>赞美</h3>
+        <p>不是「你真棒」，而是把肯定，变成对资源的追问。</p>
+        <div class="cmp-toggle">
+          <button class="cmpb on" data-c="d">直接</button><button class="cmpb" data-c="i">间接</button><button class="cmpb" data-c="b">背后</button>
+        </div>
+        <div class="cmp-out" id="cmpOut">「你在情绪上来的时候，还能让自己停一下，这很不容易。」</div>
+      </div>
+    </div>
+    <p class="refl warm-key r d5"><b>例外</b>，是这一切的地基：问题本该发生、却没发生（或没那么严重）的那个时刻。它一定存在——只是案主常常没发现。找到它，就等于告诉他：改变，其实早就发生过一次了。</p>
+  </section>
+
+  <!-- 5 scaling -->
+  <section class="scene dark" id="s5">
+    <div class="idx">05</div>
+    <div class="eyebrow r">评量问句 · 拖一拖 Rosie</div>
+    <p class="scale-prompt r d1">「0 是最糟，10 是奇迹那天。<br>Rosie，你现在——在几分？」</p>
+    <div class="scale-box r d2">
+      <div class="scale-track">
+        <div class="scale-fill" id="sFill"></div>
+        <input type="range" min="0" max="10" step="1" value="2" class="scaler" id="scaler" aria-label="把 Rosie 拖到不同的分数">
+        <div class="scale-marker" id="sMarker"><span class="scale-name">Rosie</span><span id="sVal">2</span></div>
+      </div>
+      <div class="scale-ticks"><span>0</span><span>2</span><span>4</span><span>6</span><span>8</span><span>10</span></div>
+      <div class="scale-cap"><div class="who" id="capWho">起点</div><div class="txt" id="capTxt">两周前，她在 2 分。</div></div>
+      <p class="scale-principle r d3">永远问「你是<b style="color:#fff;font-weight:600">怎么从 2 走到 5</b> 的」，而不是「为什么还不是 10」。<br>量尺把抽象的希望，变成了能被衡量、能被往前推一小步的东西。</p>
+    </div>
+  </section>
+
+  <!-- 6 assessment map -->
+  <section class="scene dark" id="s6">
+    <div class="idx">06</div>
+    <div class="eyebrow r">评估 · 《心理治疗中的首次访谈》</div>
+    <h2 class="mid r d1">如果 SFBT 教我「退后」，<br>评估，教我「看清」。<span style="font-size:.55em;font-weight:400;opacity:.6">点开看看 ↓</span></h2>
+    <div class="amap r d2">
+      <div class="acats">
+        <button class="acat on" data-k="indiv"><span>个体评估</span><span class="ac-n">01</span></button>
+        <button class="acat" data-k="family"><span>家庭评估</span><span class="ac-n">02</span></button>
+        <button class="acat" data-k="problem"><span>问题评估</span><span class="ac-n">03</span></button>
+        <button class="acat" data-k="who"><span>会谈对象</span><span class="ac-n">04</span></button>
+        <button class="acat" data-k="output"><span>评估的产出</span><span class="ac-n">05</span></button>
+      </div>
+      <div class="adetail">
+        <h3 id="adTitle">个体评估</h3>
+        <p class="anote" id="adNote">看清一个人此刻的状态，以及他是怎么走到这里的。</p>
+        <div class="aitems" id="adItems"></div>
+        <div class="atag" id="adTag" style="display:none"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 individual: MSE 7 dims -->
+  <section class="scene dark" id="s7">
+    <div class="idx">07</div>
+    <div class="eyebrow r">个体评估 · 精神状态检查</div>
+    <h2 class="mid r d1">光是「看」一个人，<br>就有 <span class="blue">七个维度</span>。</h2>
+    <p class="lede r d1" style="margin-top:14px">还是《扪心问诊》那个飞行员——他炸死了一群孩子，却说自己「没有任何愧疚」。<br>试着用这七面镜子去观察他：<span style="font-size:.8em;opacity:.6">点一个维度 ↓</span></p>
+    <div class="dims r d2">
+      <button class="dimb on" data-k="d0"><span class="dnum">1</span>外貌</button>
+      <button class="dimb" data-k="d1"><span class="dnum">2</span>言语</button>
+      <button class="dimb" data-k="d2"><span class="dnum">3</span>情绪与情感</button>
+      <button class="dimb" data-k="d3"><span class="dnum">4</span>思维过程与内容</button>
+      <button class="dimb" data-k="d4"><span class="dnum">5</span>感官知觉</button>
+      <button class="dimb" data-k="d5"><span class="dnum">6</span>心智能力</button>
+      <button class="dimb" data-k="d6"><span class="dnum">7</span>对访谈者的感受</button>
+    </div>
+    <div class="dim-out r d3"><div class="do-h" id="doH">外貌</div><div class="do-t" id="doT">军人般笔挺、整洁，姿态克制——一切都像在他的掌控之中。</div></div>
+  </section>
+
+  <!-- 8 psychoanalysis: surface / depth -->
+  <section class="scene dark" id="s8">
+    <div class="idx">08</div>
+    <div class="eyebrow r">个体评估 · 精神分析的眼睛</div>
+    <div class="dial r d1" style="--pos:14%">
+      <span class="end hotb">治疗师</span><div class="dial-track"><div class="dial-dot b"></div></div><span class="end">案主</span>
+    </div>
+    <h2 class="big r d1" style="margin-top:8px">精神分析，听你<br><span class="blue">没说出口</span>的话。</h2>
+    <p class="lede r d2" style="max-width:46ch">SFBT 会相信他说的；精神分析不会——它假设，一个人最要紧的东西，恰恰藏在他没说、甚至自己都不知道的地方。点开每张卡，看看「底下」：</p>
+    <div class="flip-row">
+      <div class="flip r d3" tabindex="0" role="button" aria-label="翻面"><div class="flip-in">
+        <div class="flip-face flip-front"><span class="flip-lbl">他说的</span><span class="flip-txt">「那是一次<br>干净的任务。」</span><span class="flip-hint">点一下 →</span></div>
+        <div class="flip-face flip-back"><span class="flip-lbl">底下</span><span class="flip-txt">把愧疚，锁进了「专业」这个词里。</span></div>
+      </div></div>
+      <div class="flip r d4" tabindex="0" role="button" aria-label="翻面"><div class="flip-in">
+        <div class="flip-face flip-front"><span class="flip-lbl">他说的</span><span class="flip-txt">「我什么<br>感觉都没有。」</span><span class="flip-hint">点一下 →</span></div>
+        <div class="flip-face flip-back"><span class="flip-lbl">底下</span><span class="flip-txt">平静得反常——那是情感被冻住的样子。</span></div>
+      </div></div>
+      <div class="flip r d5" tabindex="0" role="button" aria-label="翻面"><div class="flip-in">
+        <div class="flip-face flip-front"><span class="flip-lbl">他说的</span><span class="flip-txt">「我只是来<br>配合评估。」</span><span class="flip-hint">点一下 →</span></div>
+        <div class="flip-face flip-back"><span class="flip-lbl">底下</span><span class="flip-txt">他其实在找一个，能替他承受的人。</span></div>
+      </div></div>
+      <div class="flip r d6" tabindex="0" role="button" aria-label="翻面"><div class="flip-in">
+        <div class="flip-face flip-front"><span class="flip-lbl">他说的</span><span class="flip-txt">「我不<br>需要任何人。」</span><span class="flip-hint">点一下 →</span></div>
+        <div class="flip-face flip-back"><span class="flip-lbl">底下</span><span class="flip-txt">越说不需要，越像是从没被好好接住过。</span></div>
+      </div></div>
+    </div>
+    <div class="concepts r d7">
+      <span class="concept">潜意识</span><span class="concept">移情</span><span class="concept">反移情</span><span class="concept">防御机制</span><span class="concept">阻抗</span>
+    </div>
+    <p class="refl r d7" style="margin-top:18px">我有点不安：当我们认定「我比你更懂你自己」，helping 就开始有了<b>权力</b>的味道。</p>
+  </section>
+
+  <!-- 9 family / Case 39 -->
+  <section class="scene dark" id="s9">
+    <div class="idx">09</div>
+    <div class="eyebrow r">家庭评估 · 功能与结构</div>
+    <div class="dial r d1" style="--pos:50%">
+      <span class="end">助人者</span><div class="dial-track"><div class="dial-dot"></div></div><span class="end">案主</span>
+    </div>
+    <p class="dial-tag r d1">谁是专家？——不是某个人，是「<span class="red">关系</span>」本身。</p>
+    <p class="lede r d2">家庭评估换了焦点：问题往往不在某个人身上，而在关系的结构里——谁和谁结盟，谁被推到边缘，谁在替整个家「生病」。<br>我们用《第39号案件》来想这件事。</p>
+    <p class="dilemma r d3">一个社工，坚信小女孩正被父母虐待。父母却说，危险的是这个孩子。<br><span class="red">你，会相信谁？</span></p>
+    <div class="choices r d4">
+      <button class="choice" data-c="child">相信孩子 · 救她出来</button>
+      <button class="choice" data-c="parent">相信父母</button>
+    </div>
+    <div class="reveal39" id="rev39">
+      <p class="twist">电影给了一记反转：那个「受害的孩子」，才是真正的危险。社工拼尽全力的拯救，最终成了灾难。</p>
+      <p class="eth">现实里，<b>保护孩子永远是对的默认</b>。这部惊悚片不是要我们怀疑受害者——它像一记闷棍，问的是另一件事：<b>当我们百分百确定自己站在正义那边时，那份「确定」，本身是不是最该被警惕的东西？</b>社工伦理最难的，从来不是分辨好人坏人，而是在看不清的时候，依然必须做判断。</p>
+    </div>
+  </section>
+
+  <!-- 10 danger -->
+  <section class="scene dark" id="s10">
+    <div class="idx">10</div>
+    <div class="eyebrow r">问题评估 · 最危险的两端</div>
+    <h2 class="big r d1">有两种时刻，<br>所有方法都会失灵。</h2>
+    <div class="toggle-row r d2" role="tablist">
+      <button class="tgl on" id="tIn">他想伤害自己</button>
+      <button class="tgl" id="tOut">他想伤害你或别人</button>
+    </div>
+    <div class="panel-sui r d3" id="panIn">
+      <ol class="grave">
+        <li><span class="gn">1</span>SFBT 说「案主是自己生命的专家」。可当他说<b>「我想死」</b>，这句话，突然变得危险。</li>
+        <li><span class="gn">2</span>先准备好自己：熟悉机构流程，厘清自己的责任，并且——从现在起，<b>认真记录</b>。当那个念头出现，去<b>了解它</b>，而不是回避它。</li>
+        <li><span class="gn">3</span>记住三句：<b>你的能力是有限的</b>；他才是对自己生命负责的人；但只要他还愿意走进来，那份勇气，就值得被认真接住。</li>
+      </ol>
+      <p class="sui-close">我们不一定拉得住每一个人。<br>但可以不让他，在最黑的时候，一个人待着。</p>
+    </div>
+    <div class="panel-sui r d3 hide" id="panOut">
+      <ol class="grave">
+        <li><span class="gn">1</span>另一种，是我之前从没想过的：<b>他可能想伤害的，是你。</b></li>
+        <li><span class="gn">2</span>这时候，「无条件接纳」要让位给一件更基本的事：<b>你也需要安全。</b>知道机构的预案，知道什么时候该停、该撤、该找人。</li>
+        <li><span class="gn">3</span>关系是有边界的。<b>助人，不等于把自己整个交出去。</b>护住自己，你才接得住下一个人。</li>
+      </ol>
+      <p class="sui-close">把每一个走进来的人，认真当回事——<br>这里面，也包括你自己。</p>
+    </div>
+  </section>
+
+  <!-- 11 synthesis -->
+  <section class="scene light" id="s11">
+    <div class="idx">11</div>
+    <div class="eyebrow r">回到那个问题</div>
+    <h2 class="big r d1">那么，「高级」<br>到底高级在哪？</h2>
+    <p class="note r d2" style="opacity:.74">两大块，把「谁是专家」放在了不同的人手里——点点看：</p>
+    <div class="syn-buttons r d2">
+      <button class="synb on" data-m="theory">理论 · SFBT</button>
+      <button class="synb" data-m="assess">评估</button>
+    </div>
+    <div class="syn-dial r d3">
+      <div class="syn-track"><div class="syn-dot" id="synDot" style="left:90%"></div></div>
+      <div class="syn-ends"><span>助人者</span><span>案主</span></div>
+      <p class="syn-verdict" id="synVerdict">案主是专家——你相信他有改变自己的力量。</p>
+    </div>
+    <p class="close-ans r d4">我最大的收获其实很朴素——<br><b>先相信，案主有改变自己的力量。</b><br>这是优势视角，也是两本书共同的底色。</p>
+    <p class="close-final r d5">SFBT 把它做到极致：案主就是专家，我退到一边，帮他找回本来就有的资源。<br>而评估提醒我：相信，不等于放任。看清一个人的状态、判断他是否有危险、该出手时出手——这份判断，也是专业的一部分。<br><b>所谓「高级」，大概就是：既始终站在案主这边、相信他会变好，又在需要时，拿得出自己的判断。</b></p>
+    <div class="sign r d6">
+      <div class="s-thx">谢　谢</div>
+      <div class="s-name"><b>赵培涵</b>　·　51270135022　·　高级社会工作实务 学期回顾</div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const deck=document.getElementById('deck');
+const scenes=[...document.querySelectorAll('.scene')];
+const dotsWrap=document.getElementById('dots');
+const cNow=document.getElementById('cNow');
+const railFill=document.getElementById('railFill');
+let cur=0;
+
+scenes.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.setAttribute('aria-label','第 '+(i+1)+' 页');
+  if(i===0)b.classList.add('on');
+  b.addEventListener('click',()=>scenes[i].scrollIntoView());
+  dotsWrap.appendChild(b);
+});
+const dotBtns=[...dotsWrap.children];
+
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      const i=scenes.indexOf(e.target);
+      if(i!==cur){cur=i;update();}
+    }
+  });
+},{threshold:.5});
+scenes.forEach(s=>io.observe(s));
+
+function update(){
+  cNow.textContent=String(cur+1).padStart(2,'0');
+  dotBtns.forEach((d,i)=>d.classList.toggle('on',i===cur));
+  railFill.style.height=(cur/(scenes.length-1)*100)+'%';
+}
+
+window.addEventListener('keydown',e=>{
+  const t=document.activeElement.tagName;
+  if(t==='INPUT'&&(e.key==='ArrowLeft'||e.key==='ArrowRight'))return;
+  if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();if(cur<scenes.length-1)scenes[cur+1].scrollIntoView();}
+  if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();if(cur>0)scenes[cur-1].scrollIntoView();}
+  if(e.key==='Home')scenes[0].scrollIntoView();
+  if(e.key==='End')scenes[scenes.length-1].scrollIntoView();
+});
+
+/* build technique orbit */
+const coreTech=['奇迹式问句','关系问句','赞美','评量问句','例外'];
+const outerTech=['设定良好目标','反馈三要素','观察/行为建议','未知技巧','慢一拍引导','倾听·选择·建构','形成问句','获取细节','回应关键词','并入用词','开放/封闭问句','总结','语意重述','沉默的使用','非语言行为','自我揭露','确认知觉','自然同理','一般化','焦点回案主','探索意义','拓展对话'];
+function buildRing(el,items,Rpct,core){
+  const n=items.length;
+  items.forEach((it,i)=>{
+    const a=(i/n*360);
+    const item=document.createElement('div');item.className='ritem';
+    item.style.setProperty('--a',a+'deg');
+    item.style.setProperty('--R',Rpct);
+    const keep=document.createElement('div');keep.className='rkeep';
+    const lbl=document.createElement('span');lbl.className='rlbl'+(core?' core':'');
+    lbl.style.setProperty('--na',(-a)+'deg');lbl.textContent=it;
+    keep.appendChild(lbl);item.appendChild(keep);el.appendChild(item);
+  });
+}
+buildRing(document.getElementById('ringIn'),coreTech,'calc(min(74vw,62vh,560px)*0.20)',true);
+buildRing(document.getElementById('ringOut'),outerTech,'calc(min(74vw,62vh,560px)*0.40)',false);
+
+/* role chips */
+const roleSay=document.getElementById('roleSay');
+const roleTexts={
+  expert:'——这学期之前，我以为助人就是「我懂，我来告诉你怎么办」。',
+  detective:'——评估的时候确实像查案：问什么、不问什么，决定了你看见什么。',
+  company:'——可有时候，最有用的只是稳稳地坐在那儿，不急着出主意。',
+  mirror:'——SFBT 把我变成一面镜子：让案主在我这儿，重新看清他自己。'
+};
+document.querySelectorAll('.role').forEach(r=>{
+  r.addEventListener('click',()=>{
+    document.querySelectorAll('.role').forEach(x=>x.classList.remove('on'));
+    r.classList.add('on');roleSay.textContent=roleTexts[r.dataset.k];
+  });
+});
+
+/* compliment toggle */
+const cmpOut=document.getElementById('cmpOut');
+const cmpTxt={
+  d:'「你在情绪上来的时候，还能让自己停一下，这很不容易。」',
+  i:'「你当时，是怎么让自己停下来的？」—— 一边肯定，一边指向他已有的能力。',
+  b:'「我听你女儿说，你是个很会安慰人的妈妈。」—— 借第三人之口，把肯定说出来。'
+};
+document.querySelectorAll('.cmpb').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.cmpb').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');cmpOut.textContent=cmpTxt[b.dataset.c];
+  });
+});
+
+/* scaling */
+const scaler=document.getElementById('scaler'),marker=document.getElementById('sMarker'),sVal=document.getElementById('sVal'),
+  sFill=document.getElementById('sFill'),capWho=document.getElementById('capWho'),capTxt=document.getElementById('capTxt');
+const caps={
+ 0:['零','彻底的零。可她没走到这里。'],1:['很低','还没到 0——你是靠什么撑住的？'],
+ 2:['起点','两周前，她在 2 分。'],3:['已经不是 0 了','这中间，你悄悄做了点什么？'],
+ 4:['有点松动','哪一天，情况稍微好过一点点？'],5:['现在','Rosie 说：5 分。 ／ 社工：哇——从 2 到 5，你怎么做到的？'],
+ 6:['再上一步','到 6 分需要什么？ ／ 「家里，得有食物。」'],7:['想象一下','到 7 分，家里会出现什么不一样的小画面？'],
+ 8:['更靠近了','这画面里，第一个注意到变化的人是谁？'],9:['几乎到了','到这里，你已经做对了太多事。'],
+ 10:['奇迹那天','早起、早餐、少争吵——那个早晨的样子。']
+};
+function setScale(v){
+  const pct=v/10*100;marker.style.left=pct+'%';sFill.style.width=pct+'%';sVal.textContent=v;
+  marker.style.background=v>=5?'var(--red)':'var(--blue)';
+  capWho.textContent=caps[v][0];capTxt.textContent=caps[v][1];
+}
+scaler.addEventListener('input',e=>setScale(+e.target.value));setScale(2);
+
+/* assessment map */
+const catData={
+  indiv:{t:'个体评估',n:'看清一个人此刻的状态，以及他是怎么走到这里的。',items:['精神状态检查（观察·倾听·感觉）','成长史','疾病史'],tag:'本场深讲 → 《扪心问诊》飞行员'},
+  family:{t:'家庭评估',n:'问题常常不在某个人，而在关系的结构里。',items:['家庭的功能','家庭的结构','谁与谁结盟 · 谁被推到边缘'],tag:'本场深讲 → 《第39号案件》'},
+  problem:{t:'问题评估',n:'最危险的几个判断，往往就藏在这里。',items:['是否会伤害自己（自杀）','是否会伤害你或他人','物质滥用 / 成瘾','儿童忽视、虐待与性虐待'],tag:'本场深讲 → 自杀 & 伤人'},
+  who:{t:'会谈对象',n:'对不同的人，首次访谈要换不同的问法。',items:['成人（自荐）','儿童','家庭','伴侣'],tag:'《首次访谈》逐章细讲'},
+  output:{t:'评估的产出',n:'最后落到纸上：让你、督导、团队都能据此决定怎么帮。',items:['心理测验','撰写评估报告（生物心理社会评估）'],tag:''}
+};
+const adTitle=document.getElementById('adTitle'),adNote=document.getElementById('adNote'),
+  adItems=document.getElementById('adItems'),adTag=document.getElementById('adTag');
+function showCat(k){
+  const d=catData[k];adTitle.textContent=d.t;adNote.textContent=d.n;adItems.innerHTML='';
+  d.items.forEach((it,i)=>{
+    const el=document.createElement('div');el.className='aitem';el.textContent=it;adItems.appendChild(el);
+    setTimeout(()=>el.classList.add('show'),60+i*110);
+  });
+  if(d.tag){adTag.style.display='inline-block';adTag.textContent=d.tag;}else{adTag.style.display='none';}
+}
+document.querySelectorAll('.acat').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.acat').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');showCat(b.dataset.k);
+  });
+});
+showCat('indiv');
+
+/* MSE 7 dims */
+const doH=document.getElementById('doH'),doT=document.getElementById('doT');
+const dimData={
+  d0:['外貌','军人般笔挺、整洁，姿态克制——一切都像在他的掌控之中。'],
+  d1:['言语','语速平稳、用词精确，像在做一次任务汇报；很少停顿，也很少流露。'],
+  d2:['情绪与情感','自陈「没有任何感觉」；情感平淡、疏离——谈到孩子时那种过度的平静，本身就值得注意。'],
+  d3:['思维过程与内容','逻辑严密、条理清晰；但反复绕回「那是一次合规的任务」，像在替自己辩护。'],
+  d4:['感官知觉','警觉、定向清晰，没有幻觉或妄想；意识完全清醒——他不是「疯了」，他是太清醒了。'],
+  d5:['心智能力','高功能、聪明、训练有素——这反而让他更擅长，把痛苦藏得很好。'],
+  d6:['对访谈者的感受','带着轻蔑与挑衅，不断试探治疗师——而这，正是移情的入口。']
+};
+document.querySelectorAll('.dimb').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.dimb').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');const d=dimData[b.dataset.k];doH.textContent=d[0];doT.textContent=d[1];
+  });
+});
+
+/* flip cards */
+document.querySelectorAll('.flip').forEach(f=>{
+  const toggle=()=>f.classList.toggle('on');
+  f.addEventListener('click',toggle);
+  f.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});
+});
+
+/* case 39 */
+const rev39=document.getElementById('rev39');
+document.querySelectorAll('.choice').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('.choice').forEach(x=>x.classList.remove('picked'));
+    c.classList.add('picked');rev39.classList.add('show');
+  });
+});
+
+/* danger toggle */
+const tIn=document.getElementById('tIn'),tOut=document.getElementById('tOut'),
+  panIn=document.getElementById('panIn'),panOut=document.getElementById('panOut');
+tIn.addEventListener('click',()=>{tIn.classList.add('on');tOut.classList.remove('on');panIn.classList.remove('hide');panOut.classList.add('hide');});
+tOut.addEventListener('click',()=>{tOut.classList.add('on');tIn.classList.remove('on');panOut.classList.remove('hide');panIn.classList.add('hide');});
+
+/* synthesis dial: two blocks */
+const synDot=document.getElementById('synDot'),synVerdict=document.getElementById('synVerdict');
+const synData={
+  theory:[90,'案主是专家——你相信他有改变自己的力量。'],
+  assess:[28,'专家身份回到社工：看清状态、识别风险、负起判断。']
+};
+document.querySelectorAll('.synb').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.synb').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');const d=synData[b.dataset.m];
+    synDot.style.left=d[0]+'%';
+    synDot.style.background=b.dataset.m==='assess'?'var(--blue-deep)':'var(--red-deep)';
+    synVerdict.textContent=d[1];
+  });
+});
+</script>
+</body>
+</html>
